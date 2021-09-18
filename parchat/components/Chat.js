@@ -18,8 +18,6 @@ function Chat({ id, userEmail, contactEmail }) {
     getContact()
   }, [])
 
-  console.log(contact)
-
   const joinChat = () => {
     router.push(`/chat/${id}`)
   }
@@ -44,6 +42,8 @@ const Container = styled.div`
   width: 100%;
   text-align: center;
   align-items: center;
+  border: 1px solid ${({ theme }) => theme.toggleBorder};
+
   justify-content: center;
   :hover {
     background-color: gray;

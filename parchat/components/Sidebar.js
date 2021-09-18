@@ -12,7 +12,7 @@ function Sidebar() {
   const [chats, setChats] = useState([])
 
   async function getChats() {
-    if (user) await get_chats(user.email, setChats)
+    if (user) get_chats(user.email, setChats)
     return
   }
 
@@ -80,11 +80,11 @@ const Header = styled.div`
   display: flex;
   position: sticky;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.main.background};
-  color: ${({ theme }) => theme.main.primary};
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
   align-items: center;
   padding: 16px;
-  height: 100px;
   top: 0;
   z-index: 1;
 `
@@ -115,16 +115,16 @@ const Chats = styled.div`
 `
 
 const Button = styled.button`
-  background-color: ${({ theme }) => theme.button.background};
-  color: ${({ theme }) => theme.main.primary};
+  background-color: ${({ theme }) => theme.btn_background};
+  color: ${({ theme }) => theme.btn_text};
   float: left;
-  border: none;
+  border: 1px solid ${({ theme }) => theme.toggleBorder};
   outline: none;
   cursor: pointer;
   padding: 16px 16px;
   transition: 0.3s;
   :hover {
-    background-color: ${({ theme }) => theme.button.background_secondary};
+    background-color: ${({ theme }) => theme.background};
   }
 `
 
@@ -139,7 +139,9 @@ const Input = styled.input`
   margin-bottom: 1rem;
   flex: 1;
   border: 0;
-  border-bottom: 2px solid ${({ theme }) => theme.main.background};
+  color: ${({ theme }) => theme.btn_text};
+  background: transparent;
+  border-bottom: 2px solid ${({ theme }) => theme.background};
   outline: 0;
   font-size: 1rem;
 `

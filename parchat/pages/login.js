@@ -26,6 +26,7 @@ const Container = styled.div`
   display: grid;
   place-items: center;
   height: 90vh;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const SubContainer = styled.div`
@@ -33,6 +34,7 @@ const SubContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  background-color: ${({ theme }) => theme.background};
 `
 
 const Button = styled.button`

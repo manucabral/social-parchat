@@ -1,36 +1,25 @@
-import { auth, database } from "../firebase"
+import Login from "./login"
+import Loading from "../components/Loading"
+import { auth } from "../firebase"
 import { update_user } from "../firebase/db"
 import { useAuthState } from "react-firebase-hooks/auth"
-import Loading from "../components/Loading"
-import Login from "./login"
-import { createGlobalStyle, ThemeProvider } from "styled-components"
-import { useEffect } from "react"
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    overflow-y: auto;
-    margin: 0;
-    padding: 0;
-    font-family: 'News Cycle', sans-serif;
-    box-sizing: border-box;
-  }
-`
-
-const theme = {
-  main: {
-    primary: "#FFFFFF",
-    secondary: "#06070a",
-    background: "#5c009d",
-  },
-  button: {
-    background: "#3e0d61",
-    background_secondary: "#180029",
-    primary: "#FFFFFF",
-  },
-}
+import { ThemeProvider } from "styled-components"
+import { darkTheme, lightTheme, GlobalStyles } from "../themes/config"
+import { useEffect, useState } from "react"
 
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth)
+  const [theme, setTheme] = useState(false)
+
+  const toggleTheme = () => {
+    localStorage.setItem("theme", !theme)
+    setTheme(!theme)
+    return
+  }
+
+  const currentTheme = () => {
+    return theme ? lightTheme : darkTheme
+  }
 
   useEffect(() => {
     if (user) {
@@ -42,12 +31,11 @@ function MyApp({ Component, pageProps }) {
   if (!user) return <Login />
 
   return (
-    <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={currentTheme}>
+      <button onClick={toggleTheme}>Switch Theme</button>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
 

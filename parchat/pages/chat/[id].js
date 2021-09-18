@@ -19,11 +19,11 @@ function Chat() {
 
 export default Chat
 
-/*
+
 export async function getServerSideProps(context){
-  return
+  
 }
-*/
+
 
 const Container = styled.div`
   display: flex;
